@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML DOM Structure</title>
+
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f4ff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 550px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px gray;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        .tree {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        .node {
+            display: inline-block;
+            background-color: #d6e8ff;
+            padding: 5px 15px;
+            border-radius: 6px;
+            margin: 3px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            background-color: #e8f7e8;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 id="heading">HTML DOM Tree</h1>
+
+        <div class="tree" id="tree">
+            <div>
+                <span class="node" id="htmlNode">html</span>
+            </div>
+
+            <div>
+                ├── <span class="node" id="headNode">head</span>
+                <br>
+                └── <span class="node" id="bodyNode">body</span>
+            </div>
+
+            <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;├──
+                <span class="node" id="h1Node">h1</span>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;└──
+                <span class="node" id="pNode">p</span>
+            </div>
+
+            <p id="message">Welcome to DOM structure!</p>
+        </div>
+
+        <button onclick="showParent()">Show Parent</button>
+        <button onclick="showChildren()">Show Children</button>
+        <button onclick="showSiblings()">Show Siblings</button>
+        <button onclick="changeText()">Change Text</button>
+        <button onclick="resetPage()">Reset</button>
+
+        <div id="result">
+            Click a button to explore the DOM tree.
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Find the parent of an element
+        function showParent() {
+            let element = document.getElementById("message");
+
+            let parent = element.parentElement;
+
+            document.getElementById("result").textContent =
+                "Parent element: " + parent.tagName;
+        }
+
+        // Find the child elements of the tree
+        function showChildren() {
+            let element = document.getElementById("tree");
+
+            let children = element.children;
+
+            let output = "Child elements: ";
+
+            for (let i = 0; i < children.length; i++) {
+                output += children[i].tagName + " ";
+            }
+
+            document.getElementById("result").textContent = output;
+        }
+
+        // Find the next sibling of an element
+        function showSiblings() {
+            let element = document.getElementById("h1Node");
+
+            let next = element.parentElement.nextElementSibling;
+
+            document.getElementById("result").textContent =
+                "Next sibling container: " + next.tagName;
+        }
+
+        // Change an element's text
+        function changeText() {
+            document.getElementById("heading").textContent =
+                "DOM Structure Changed!";
+
+            document.getElementById("result").textContent =
+                "JavaScript updated the heading using the DOM.";
+        }
+
+        // Restore the original heading
+        function resetPage() {
+            document.getElementById("heading").textContent =
+                "HTML DOM Tree";
+
+            document.getElementById("result").textContent =
+                "Click a button to explore the DOM tree.";
+        }
+    </script>
+
+</body>
+</html>
